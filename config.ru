@@ -1,7 +1,6 @@
 # In config/application.rb, normally we require rails/all
 # Instead, we'll only require what we need:
 require "action_controller/railtie"
-require "active_support"
 
 class HelloWorld < Rails::Application
   config.eager_load = true # necessary to silence warning
