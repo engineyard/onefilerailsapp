@@ -9,12 +9,12 @@ class HelloWorld < Rails::Application
   config.logger = Logger.new($stdout)
   Rails.logger  = config.logger
   config.secret_key_base = ENV["SECRET_KEY_BASE"] # Rails won't boot w/o a secret token for session, cookies, etc.
-  routes.append { post "/hello" => "hello#index" }
+  routes.append { get "/hello" => "hello#index" }
 end
 
 class HelloController < ActionController::Base
   def index
-    render "Hello World!"
+    render plain: "Hello World!"
   end
 end
 
