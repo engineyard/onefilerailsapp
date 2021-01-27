@@ -6,13 +6,16 @@ class HelloWorld < Rails::Application
   config.eager_load = true # necessary to silence warning
   config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
   # Rails won't boot w/o a secret token for session, cookies, etc.
-  config.secret_key_base = ENV["SECRET_KEY_BASE"]
-  routes.append { get "/hello" => "hello#index" }
+  config.secret_key_base = SecureRandom.uuid  
+  config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
+  routes.append { root :to => "hello#index" }
 end
 
 class HelloController < ActionController::Base
+  @@count = 1
   def index
-    render html: "<html><body><h1>Hello World!</h1></body></html>".html_safe
+    @@count = @@count + 1
+    render html: "<html><body><h1>Hello World! #{@@count} </h1></body></html>".html_safe
   end
 end
 
