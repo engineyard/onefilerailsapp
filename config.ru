@@ -1,6 +1,6 @@
 require 'action_controller/railtie'
 
-SURVEY_CHOICES = ["Netflix", "Gaming", "Dining", "Nightclub"]
+SURVEY_CHOICES = ["Netflix", "Gaming", "Dining", "NightClub"]
 
 class SurveyApp < Rails::Application
   config.eager_load = true # necessary to silence warning
@@ -31,16 +31,14 @@ class SurveyController < ActionController::Base
   def form_html
     form_start = <<-FORM_START_HTML
     <h3>What is your favorite weekend activity?</h3>
-    <div class="row uniform">
     <form method="post" action="survey">
     FORM_START_HTML
     
     form_end = <<-FORM_END_HTML
 	  <br/><br/><div class="12u$">
-		<input type="submit" value="Submit" style="background-color: #5AA6ED; color: #ffffff !important; font-family: Taviraj, serif; font-size: 14; height: 41; padding: 0; border-radius: 5px; width: 100" />
+		<input type="submit" value="Submit" style="background-color: #5AA6ED; color: #ffffff !important; font-family: Taviraj, serif; font-size: 18; height: 26; padding: 0; border-radius: 5px; width: 100; vertical-align: middle;" />
 	  </div>
     </form>
-    </div>
     FORM_END_HTML
     
     buffer = form_start
@@ -53,7 +51,7 @@ class SurveyController < ActionController::Base
   def button_html(choice)
     <<-CHOICE_HTML
       <div class="4u 12u$(small)">
-	    <input type="radio" id="#{choice}" name="activity_choice" value="#{choice}" checked>
+	    <input type="radio" id="#{choice}" name="activity_choice" value="#{choice}" style="font-family: Taviraj, serif;">
 		<label for="netflix">#{choice}</label>
 	  </div>
     CHOICE_HTML
