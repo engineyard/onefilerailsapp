@@ -17,11 +17,8 @@ class SurveyController < ActionController::Base
     choice = params["activity_choice"]
     if choice
       count = @@responses[choice]
-      if count.nil?
-        @@responses[choice] = 1
-      else
-        @@responses[choice] = count + 1
-      end
+      count = 0 unless not count.nil?
+      @@responses[choice] = count + 1
       render html: results_html(choice).html_safe
     else
       render html: form_html.html_safe
@@ -51,9 +48,9 @@ class SurveyController < ActionController::Base
   def button_html(choice)
     <<-CHOICE_HTML
       <div class="4u 12u$(small)">
-	    <input type="radio" id="#{choice}" name="activity_choice" value="#{choice}" style="font-family: Taviraj, serif;">
-		<label for="netflix">#{choice}</label>
-	  </div>
+	      <input type="radio" id="#{choice}" name="activity_choice" value="#{choice}" style="font-family: Taviraj, serif;">
+		    <label for="netflix">#{choice}</label>
+	    </div>
     CHOICE_HTML
   end
   
